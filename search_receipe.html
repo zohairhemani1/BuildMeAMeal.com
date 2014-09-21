@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+<title>Register | Build Me a Meal</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.subheading {
+	text-align: center;
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+  <script>
+ 
+  $(document).ready(function(){
+  if ('_tab1' in localStorage)
+    {localStorage.removeItem('_tab1');}
+	if ('_tab2' in localStorage)
+	{localStorage.removeItem('_tab2');
+	}
+	
+  $("#tab1button").click(function(){
+  var tab1= $("#inputrecipe").val();
+   if (tab1){
+   localStorage.setItem('_tab1', tab1);
+
+   location.href = 'recipes.html';
+   
+   }
+ else {
+		alert("enter reciepe name!!");
+		}
+	});
+	
+	//for tab2
+	$("#tab2button").click(function(){
+	if ($("#ingre1").val()==="" && $("#ingre2").val()==="" && $("#ingre3").val()==="" && $("#brunch").val()===""){
+   alert("enter atleast in one field");}
+   else{
+   var tab2="1";
+   var ingre1=$("#ingre1").val();
+   var ingre2=$("#ingre2").val();
+   var ingre3=$("#ingre3").val();
+  var  brunch=$("#brunch").val();
+	
+  localStorage.setItem('_tab2', tab2);
+localStorage.setItem('_ingre1', ingre1 );
+localStorage.setItem('_ingre2', ingre2);  
+ localStorage.setItem('_ingre3', ingre3);
+    localStorage.setItem('_brunch', brunch);
+   location.href = 'recipes.html';
+
+   }
+	});
+  });
+  
+  
+  </script>
+
+
+
+</head>
+
+<body>
+<!-- The title bar code -->
+<header>
+  <div id="top-bar"> <span id="title"> Build Me A Meal</span> </div>
+  
+</header>
+
+<!-- Body code -->
+<div align="center">
+<div class="tabs"  style="width:95%; height:340px">
+    <!-- New tab starts here -->
+	
+	
+   <div  class="tab" >
+       <input type="radio" id="tab-1" name="tab-group-1" checked>
+       <label for="tab-1">Search Recipes</label>
+       
+       <div class="content">
+	   So which recipe you are looking for today!
+	   <br>
+	   <br>
+           <input type="text2"  id="inputrecipe" placeholder="enter recipe name" class="userInput" />
+  <br/>
+  <br>
+  
+  <a href="#"><img src="img/specific_quest_09.png" width="140" id="tab1button" /></a>
+       </div> 
+   </div>
+    
+	<!-- New tab starts here -->
+	
+   <div class="tab"  >
+       <input type="radio" id="tab-2" name="tab-group-1">
+       <label for="tab-2"  >Meal Finder</label>
+       
+       <div class="content">
+           What do you have in hand or in fridge?
+           <p> And what are you making</p>
+           <form name="registerForm" action="#" method="post">
+<br/>
+<br/>
+  <input type="text2" id="ingre1" placeholder="ingrediant 1" class="userInput" />
+  <br/>
+  <input type="text2"  id="ingre2"  placeholder="ingrediant 2" class="userInput" />
+  <br/>
+  <input type="text2"  id="ingre3"  placeholder="ingrediant 3" class="userInput" />
+  <br/>
+  
+    <input type="checkbox" name="Making" id="making" />
+  <span id="termsDesc">I'm Making</span>
+   <br/>
+   <br/>
+  <input type="text2"  id="brunch" placeholder="breakfast/brunch" class="userInput" />
+  <br/>
+  
+  <a href="#"><img src="img/specific_quest_09.png" width="140" id="tab2button" /></a>
+   <br/>
+</form>
+           
+       </div> 
+   </div>
+    
+  <!-- tabs end here -->
+    
+</div>
+</div>
+
+<!-- Navigation tabs code -->
+<footer   style=" position:absolute;
+   bottom:1; width:320px"> 
+
+<table width="100%" class="table1" >
+  <tr align="center" style="color:#76626f; font-size:10px; " align="center" height="50px" >
+    <td ><a href="search_receipe.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_20.png" width="40" height="32">
+    <br>
+     Search</a></td>
+    <td ><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_login_05.png"  width="45" height="30">
+    <br>
+    Browse</a></td>
+    <td><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_13.png" width="40" height="32">
+    <br>Recipe</a>
+    </td>
+    <td><a href="specific_quest.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_29.png" width="40" height="32"  >
+    <br>Grocery</a></td>
+    <td><a href="aboutus.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_27.png" width="40" height="32" >
+    <br>Coupons</a>
+    </td>
+   
+  </tr>
+
+
+</table>
+
+
+</footer>
+</body>
+</html>

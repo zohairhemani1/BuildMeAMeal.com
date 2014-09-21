@@ -1,0 +1,72 @@
+$.ajax({
+		type:"POST",
+		url:"register.php",
+		data: "userid="+sendu+"&email="+sende+"&password="+pass1,
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		$("#result1").html(msg.login);
+		$("#result2").html(msg.emailerror);
+		}
+		});
+		}
+
+
+$list=array('login'=>$user,'emailerror'=>"Incorrect User Name or Password".$row['count(*)']);
+$c= json_encode($list);
+echo $c;/*
+
+
+
+
+
+
+
+
+if(document.getElementById("termsCheckbox").checked){
+
+}else{ alert("Accept Terms and Condition");}
+
+window.localstorage
+
+
+image
+results recipes
+each reciepe page
+
+
+login
+  {
+  c = window.localstore = 'reg'
+  c!=null
+  {
+  }
+  }
+
+
+/*
+$list['q1']= 'Y';
+$list['q2']= 'Y';
+$list['q3']= 'Y';
+$list['q4']= 'Y';
+$list['q5']= 'Y';
+$list['q6']= 'Y';
+$list['q7']= 'Y';
+$list['q8']= 'Y';
+$list['q9']= 'Y';
+$list['q10']= 'Y';
+$list['q11']= 'Y';
+$list['q12']= 'Y';
+ */
+
+ 
+ 
+ 
+ 
+select recepies.recid,recepies.recname,ingredients.method from ingredients,recepies  where (ingredients.recid=recepies.recid)&
+ (ing1 like '%choc%' or ing2 like '%choc%'
+  or ing3 like '%choc%' or ing4 like '%choc%' or ing5 like '%choc%' or ing6 like '%choc%' or
+  ing7 like '%choc%' or ing8 like '%choc%' or ing9 like '%choc%' or ing10 like '%choc%' or ing11
+  like '%choc%' or ing12 like '%choc%' or ing13 like '%choc%' or ing14 like '%choc%' or ing15 like
+  '%choc%'or ing16 like '%choc%' or ing17 like '%choc%'  or ing18 like '%choc%'
+  or ing19 like '%choc%' or ing20 like '%choc%' or ing21 like '%choc%'  or ing22
+  like '%choc%' or ing23 like '%choc%' or ing24 like '%choc%')

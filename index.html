@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+<title>Register | Build Me a Meal</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+ <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  $("#registerButton").click(function(){
+		var sendu= $("#login").val();
+		var sendp= $("#password").val();
+		if (sendu && sendp)
+		{$.ajax({
+		type:"POST",
+		data: "login="+sendu+"&password="+sendp,
+		url:"http://www.fajjemobile.info/buildmeameal.com/finalversion/htmlmeal/Login.php",
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		if (msg.error==sendu){
+		localStorage.setItem("user", "reg");
+		location.href = 'search_receipe.html';}
+		else
+		{$("#result").html(msg.error);
+
+		}
+		}
+		});}
+		else {
+		$("#result").html("Please enter your username and password");
+		}
+  
+		});
+ 
+  });
+  
+  
+  </script>
+</head>
+
+<body >
+<!-- The title bar code -->
+<header>
+  <div id="top-bar"> <span id="title"> Build Me A Meal</span> </div>
+</header>
+
+<!-- Body code -->
+
+
+<div style="width:320px; height:110px;";>
+  <div class="food"> </div>
+  <div class="title-desc-login">
+  <h5 class="joinus"><strong>Join Us!</strong></h5> Create an account to <br/>
+    save your recipe and<br/>
+    made yourself anytime.</div>
+</div>
+<div class="register">
+<form name="registerForm" action="#" method="post">
+
+  <input type="text" placeholder="Your Login ID " id="login" class="userInput" />
+  <br/>
+  <input type="password" placeholder="Your Password " id="password" class="userInput" />
+  <br/>
+ <!--suppress HtmlUnknownTag -->
+    <font color="red"> <div align=center id="result"></div><!--suppress HtmlUnknownTag -->
+     <font>
+  <table  width="100%">
+<tr>
+<td style="vertical-align:middle; padding-left:5px;" >
+<p class="forgotpass" >
+  Forgot Password ? </p>
+</td>
+<td>
+ <a href="#"><img src="img/bld_ml_login_03 (2).png" width="120"  id="registerButton"  align="right" style="margin-right: 10%; "/></a></td>
+</tr>
+</table>
+ 
+ 
+</form>
+ 
+
+</div>
+<div style="text-align: center;">
+ <hr width="84%" color="#d1b794" >
+ 
+ <span class="forgotpass"><a href =register.html> New User Click Here </a></span>
+ <hr width="84%"  color="#d1b794">
+</div >
+<div align="center" class= "paddingbutton">
+<a href="#"><img src="img/bld_ml_login_06.png"  width="260"  id="fbbutton"/></a>
+<br>
+<a href="#"><img src="img/bld_ml_login_03.png" width="260" style="margin-right: 1.25%;" id="gbutton"/></a>
+</div>
+
+<!-- Navigation tabs code -->
+<footer   style=" position:absolute;
+   bottom:1; width:320px"> 
+
+<table width="100%" class="table1" >
+  <tr align="center" style="color:#76626f; font-size:10px; " align="center" height="50px" >
+    <td ><a href="search_receipe.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_20.png" width="40" height="32">
+    <br>
+     Search</a></td>
+    <td ><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_login_05.png"  width="45" height="30">
+    <br>
+    Browse</a></td>
+    <td><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_13.png" width="40" height="32">
+    <br>Recipe</a>
+    </td>
+    <td><a href="specific_quest.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_29.png" width="40" height="32"  >
+    <br>Grocery</td></a>
+    <td><a href="aboutus.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_27.png" width="40" height="32" >
+    <br>Coupons</a>
+    </td>
+   
+  </tr>
+
+
+</table>
+
+
+</footer>
+</body>
+</html>
