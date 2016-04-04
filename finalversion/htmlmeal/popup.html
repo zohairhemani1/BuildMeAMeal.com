@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<script src="jquery.min.js"></script>
+<script src="magnific-popup/zepto.min.js"></script>
+<script src="magnific-popup/jquery.magnific-popup.js"></script> 
+<script type="text/javascript">
+  /*$(document).ready(function(){
+var recid=GetUrlValue('id');
+		
+		$.ajax({
+		type:"POST",
+		data: "id="+recid,
+		url:"getall.php",
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		  alert(  string+"output");
+
+                        //console.log("Stringified" + JSON.stringify(msg));
+
+                        //Continue with javascript
+						
+                        var i=2;
+                        while (msg.length >i){
+                            var recid = msg[i].recid;
+                            var recname = msg[i].recname;
+                            var method = msg[i].method;
+
+                        
+                            i++;
+                        }
+	
+	
+		}
+		});
+		
+  
+	
+ 
+  });*/
+  	 	 	
+  
+  function GetUrlValue(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] == VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+
+  
+  </script>
+<style>
+.example-popup {
+
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+  opacity: 0.5;
+}
+
+
+</style>
+  
+  
+	</head>
+	<body>
+	<div id="test-popup" class="example-popup">
+	  Popup content
+
+	<div id="ing"> blah blah blah </div>
+	<div id="rec"> very sad </div>
+</div>
+</body>
+</html>

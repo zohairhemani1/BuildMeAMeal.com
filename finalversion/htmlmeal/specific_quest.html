@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+<title>Register | Build Me a Meal</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.subheading {
+	text-align: center;
+}
+</style>
+
+ <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+  <script type="text/javascript">
+  
+  
+  $(document).ready(function(){
+   if (localStorage.getItem("user") === null) {
+  location.href = 'index.html';
+}
+  $("#submit").click(function(){
+		var q1='N',q2='N',q3='N',q4='N',q5='N',q6='N',q7='N',q8='N',q9='N',q10='N',q11='N',q12='N';
+		
+if(document.getElementById("thing1").checked){q1='Y';}
+if(document.getElementById("thing2").checked){q2='Y';}
+if(document.getElementById("thing3").checked){q3='Y';}
+if(document.getElementById("thing4").checked){q4='Y';}
+if(document.getElementById("thing5").checked){q5='Y';}
+if(document.getElementById("thing6").checked){q6='Y';}
+if(document.getElementById("thing7").checked){q7='Y';}
+if(document.getElementById("thing8").checked){q8='Y';}
+if(document.getElementById("thing9").checked){q9='Y';}
+if(document.getElementById("thing10").checked){q10='Y';}
+if(document.getElementById("thing11").checked){q11='Y';}
+if(document.getElementById("thing12").checked){q12='Y';}
+		$.ajax({
+		type:"POST",
+		data: "q1="+q1+"&q2="+q2+"&q3="+q3+"&q4="+q4+"&q5="+q5+"&q6="+q6+"&q7="+q7+"&q8="+q8+"&q9="+q9+"&q10="+q10+"&q11="+q11+"&q12="+q12,
+		url:"http://www.fajjemobile.info/buildmeameal.com/finalversion/htmlmeal/Checkboxupdate.php",
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		if (msg.status=="Success"){
+		alert("Noted");
+		location.href = 'search_receipe.html';
+		}
+		}
+		});
+		
+  
+		});
+ 
+  });
+  
+ $(document).ready(function(){
+ /*
+ if (localStorage.getItem("lastname")!="reg"){
+  alert("you need to login first");
+  location.href="index.php";}*/
+ //
+ $('#content').hide();
+  $('#loading_field').show();
+
+$.ajax({
+		
+		url:"http://www.fajjemobile.info/buildmeameal.com/finalversion/htmlmeal/Checkboxretrival.php",
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		
+			if (msg.qs1=='Y'){document.getElementById("thing1").checked = true;}
+			if (msg.qs2=='Y'){document.getElementById("thing2").checked = true;}
+			if (msg.qs3=='Y'){document.getElementById("thing3").checked = true;}
+			if (msg.qs4=='Y'){document.getElementById("thing4").checked = true;}
+			if (msg.qs5=='Y'){document.getElementById("thing5").checked = true;}
+			if (msg.qs6=='Y'){document.getElementById("thing6").checked = true;}
+			if (msg.qs7=='Y'){document.getElementById("thing7").checked = true;}
+			if (msg.qs8=='Y'){document.getElementById("thing8").checked = true;}
+			if (msg.qs9=='Y'){document.getElementById("thing9").checked = true;}
+			if (msg.qs10=='Y'){document.getElementById("thing10").checked = true;}
+			if (msg.qs11=='Y'){document.getElementById("thing11").checked = true;}
+			if (msg.qs12=='Y'){document.getElementById("thing12").checked = true;}
+
+		$('#loading_field').hide();
+		$('#content').show();
+				}
+		});
+		 
+		});
+  </script>
+
+</head>
+
+<body >
+<!-- The title bar code -->
+<header>
+  <div id="top-bar"> <span id="title"> Build Me A Meal</span>   </div>  
+  <a href="index.html"><img src="img/logout.png" onclick='localStorage.clear()' width="26" id="logoutbutton" /></a>
+</header>
+
+<!-- Body code -->
+
+<div>
+  <div class="heading2" > Meal Specific Questions</div>
+</div>
+<br>
+<div class="subheading">Here are the list of questions that you havt to click then submit for next step
+
+</div>
+<center><img src="img/loading.gif" width="80" height="60" id="loading_field"></center>
+<div class="imgBox2" id="content" >
+<form  style="padding-left: 10px ;">
+<div style="padding-bottom:5px;"></div>
+
+<input type='checkbox' name='thing' value='Y' id="thing1" align="top"/><label for="thing1"> </label> <span class="textsss"> Question about vegan? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing2"/><label for="thing2"></label> <span class="textsss"> Are you Vegetarian? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing3" align="middle"/><label  for="thing3"></label><span class="textsss">  What are the meal plan requirements for healthy? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing4"/><label for="thing4"></label><span class="textsss">  Question about meat lover? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing5"/><label for="thing5"></label><span class="textsss"> Question about chicken? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing6"/><label for="thing6"></label><span class="textsss"> Question about nut free? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing7"/><label for="thing7"></label><span class="textsss"> Question about non dairy? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing8"/><label for="thing8"></label><span class="textsss"> Question about wheat free </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing9"/><label for="thing9"></label><span class="textsss"> Question about low fat? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing10"/><label for="thing10"></label><span class="textsss"> Question about high protien? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing11"/><label for="thing11"></label> <span class="textsss">Question about low carb? </span>
+<hr class="nogap" width="94%"  color="#d1b794">
+<input type='checkbox' name='thing' value='Y' id="thing12"/><label for="thing12"></label> <span class="textsss">Question about organic? </span>
+
+<div align="center" style="padding-top:13px;">
+
+
+  <a href="#"><img src="img/specific_quest_09.png" width="140" id="submit" /></a>
+
+</div>
+</form>
+</div>
+
+
+<!-- Navigation tabs code -->
+<footer   style=" position:absolute;
+   bottom:1; width:320px"> 
+
+
+<table width="100%" class="table1" >
+  <tr align="center" style="color:#76626f; font-size:10px; " align="center" height="50px" >
+    <td ><a href="search_receipe.html" style="color:#76626f; text-decoration:none;" ><img src="img/06-magnify@2x.png" width="24" height="20">
+    <br>
+     Search</a></td>
+    <td ><a href="favrecipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/111-user@2x.png"  width="28" height="22">
+    <br>
+    Profile</a></td>
+    <td><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_13.png" width="38" height="28">
+    <br>Recipe</a>
+    </td>
+    <td><a href="specific_quest.html" style="color:#76626f; text-decoration:none;" ><img src="img/20-gear2@2x_coloured.png" width="25" height="24"  >
+    <br>Prefrences</td></a>
+    <td><a href="aboutus.html" style="color:#76626f; text-decoration:none;" ><img src="img/123-id-card@2x.png" width="28" height="22" >
+    <br>About Us</a>
+    </td>
+   
+  </tr>
+
+
+</table>
+
+
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Build Me A Meal | Register</title>
+<link href="jquery.mobile-1.0a3.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery.mobile-1.0a3.min.js" type="text/javascript"></script>
+<script src="js/local-storage.js" type="text/javascript"></script>
+<!-- <div data-role="page" data-theme="b" id="splash" style="background-color: #fff;">
+  <div class="splash"><img src="assets/img/fb.png" alt="splash" /></div>  -->
+</div>
+
+<style>
+    #networkstatus
+    {
+       
+        font-size:20px;
+        font-family:comic-sans;
+        border: 2px solid black;
+        padding: 10px;
+        background-color:gray;
+    }
+</style>
+
+<script>
+		/*
+            Global Variables defined below.
+         */
+        var connection,username,password,verifyPassword,error;
+		
+		/* $(function() 
+		{
+			if($.mobile.activePage.attr("id") != "home")
+			{
+			  setTimeout(hideSplash, 3000);
+			}
+		});
+		
+		
+			function hideSplash() 
+			{
+			  $.mobile.changePage("#home", "fade");
+			} */
+		
+		
+	</script>
+	
+	
+	<script language="javascript">
+        var db = prepareDatabase();
+        var createSQL = 'CREATE TABLE IF NOT EXISTS users (' +
+                'id INTEGER PRIMARY KEY,' +
+                'username TEXT,' +
+                'password TEXT' + ')';
+
+        // Check if this browser supports Web SQL
+        function getOpenDatabase() {
+            try {
+                if( !! window.openDatabase ) return window.openDatabase;
+                else return undefined;
+            } catch(e) {
+                return undefined;
+            }
+        }
+            
+        // Open the Web SQL database
+        function prepareDatabase() {
+            var odb = getOpenDatabase();
+            if(!odb) {
+                dispError('Web SQL Not Supported');
+                return undefined;
+            } else {
+                var db = odb( 'Quiz Up Database', '1.0', 'Login/Register Database', 10 * 1024 * 1024 );
+                db.transaction(function (t) {
+                    t.executeSql( createSQL, [], function(t, r) {
+						// success function when the table is created.
+						}, function(t, e) {
+                        alert('create table: ' + e.message);
+						// error function when the table is not created.
+                    });
+                });
+                return db;
+            }
+        }
+		
+			// How many rows do we have?
+			function countRows() {
+				if(!db) return;
+				db.readTransaction(function (t) {
+					t.executeSql('SELECT COUNT(*) AS c FROM users', [], function (t, r) {
+						var c = r.rows.item(0).c;
+						element('rowCount').innerHTML = c ? c : 0;
+					}, function(t, e) {
+						alert('countRows: ' + e.message);
+					});
+				});
+			}
+	
+			// Main display function
+			function dispResults() {
+				if(errorMessage) {
+					element('results').innerHTML = errorMessage;
+					return;
+				}
+	
+				countRows();    // update the row count each time the display is refreshed
+	
+				if(db) {
+					db.readTransaction(function(t) {    // readTransaction sets the database to read-only
+						t.executeSql('SELECT * FROM users', [], function(t, r) {
+							var bwt = new bwTable();
+							bwt.setHeader(['ID','Username', 'Password']);
+							for( var i = 0; i < r.rows.length; i++ ) {
+								var row = r.rows.item(i);
+								bwt.addRow([row.id, row.username, row.password]);
+							}
+							element('results').innerHTML = bwt.getTableHTML();
+							element('login').elements['username'].focus();
+						});
+					});
+				}
+			}
+	
+			// add or update rows in the table
+			function dbGo() {
+                
+                
+               
+                
+				if(errorMessage) return;
+                
+				validation();
+				
+				
+				
+				if(!error) 
+				{
+					db.transaction( function(t) {
+						
+						t.executeSql(' INSERT INTO users (username, password ) VALUES ( ?, ? ) ',
+							[ username, password ]
+						);
+					}, function(t, e){ alert('Insert row: ' + e.message); }, function() {
+						resetTravelForm();
+						
+					});
+					
+					alert('Successfully Registered Offline');
+					
+				}
+				else
+				{
+					alert(error);	
+				}
+				dispResults();
+			}
+	
+			// clear all the form fields and reset the button and action elements
+			function resetTravelForm() {
+				var f = element('login');
+				for( var n in [ 'username', 'password','verifyPassword'] ) {
+					f.elements[n].value = '';
+				}
+			}
+	
+			function initDisp() {
+				dispResults();
+			}
+	
+			window.onload = function() {
+				initDisp();
+			}
+			
+			function redirect(link)
+			{
+				window.location.href = link;
+			}
+		
+		
+		
+
+    </script>
+    
+    
+    <!-- phonegap on device load functions below -->
+    
+    <script>
+        
+        function init()
+        {
+            document.addEventListener("deviceready",onDeviceReady(),false);
+        }
+    
+        function onDeviceReady()
+        {
+            connection = navigator.network.connection.type;
+            if(connection=="none")
+            {
+                document.getElementById('networkstatus').innerHTML = "Offline Mode!";
+            }
+            else
+            {
+                document.getElementById('networkstatus').innerHTML = "Online Mode!";
+            }
+            
+        }
+    
+        </script>
+    
+    <!-- Decision making function below -->
+    <script>
+        function decisionMaking()
+        {
+            if(connection=="none")
+            {
+                document.getElementById('networkstatus').innerHTML = "Offline Mode!";
+                dbGo();
+            }
+            else
+            {
+                document.getElementById('networkstatus').innerHTML = "Online Mode!";
+                register();
+            }
+    }
+    </script>
+    
+    
+    <!-- Validation Function Below -->
+
+<script>
+    
+    function validation()
+    {
+        
+        var f = element('login');
+        username = f.elements['username'].value;
+        password = f.elements['password'].value;
+        verifyPassword = f.elements['verifyPassword'].value;
+        console.log(username);
+        console.log(password);
+        console.log(verifyPassword);
+        
+
+        if(!username)
+        {
+            error = 'Please enter username';
+        }
+        else if(!password)
+        {
+            error = 'Please enter Password';
+        }
+        else if(!verifyPassword)
+        {
+            error = 'Please verify Password';
+        }
+        else if(password != verifyPassword)
+        {
+            error = 'Password doesnot match';
+        }
+        else
+        {
+            error = '';
+        }
+    
+    }
+</script>
+    <!-- Online AJAX Register Function Below -->
+    
+
+
+<script>
+	
+	function register()
+	{
+        
+        validation();
+        
+        if(!error)
+        {
+            
+        
+        if(window.XMLHttpRequest)
+        {
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {
+			xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        
+        xmlhttp.onreadystatechange = function()
+        {
+            if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+                document.getElementById('results').innerHTML = xmlhttp.responseText;
+            }
+        }
+        
+        xmlhttp.open('GET','http://fajjemobile.com/buildmeameal.com/register-cloud.php?username='+document.login.username.value+'&password='+document.login.password.value,true);
+        xmlhttp.send();
+        
+        alert('Successfully Registered Online');
+        
+        }
+        else
+        {
+            alert(error);
+        }
+        
+	}
+
+</script>
+
+<!-- This reference to phonegap.js will allow for code hints as long as the current site has been configured as a mobile application. 
+	 To configure the site as a mobile application, go to Site -> Mobile Applications -> Configure Application Framework... -->
+<link href="css/style.css" rel="stylesheet" type="text/css">
+</head><body onload="init()">
+<div data-role="page" id="home">
+  <div data-role="header" data-theme="b" data-backbtn="false" >
+    <h1>Build Me A Meal | Register </h1>
+  </div>
+  <div data-role="content" class="wrapper">
+    <div class="logo"> <img src="assets/img/logo.png" width="80%"/> </div>
+    <div data-role="fieldcontain">
+      <form id="login" name="login" method="GET">
+        <div>
+          <input type="text" name="username" id="username" value="" placeholder="Username" />
+          <br/>
+          <input type="password" name="password" id="password" value="" placeholder="Password" />
+          <br/>
+          <input type="password" name="verifyPassword" id="verifyPassword" value="" placeholder="Verify Password" />
+        </div>
+        <div class="login-buttons">
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+<input id="formSubmit" type="button" name="goButton" value="Register" onClick="javascript:decisionMaking()" />
+          </div>
+          <div class="ui-block-b">
+            <input id="formSubmit" type="button" name="loginButton" value="Login" onClick="javascript:redirect('login.html')" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <br/>
+    
+    <span id="networkstatus"></span>
+    <!-- <span id="login-connect"> CONNECT WITH </span> </div> -->
+  <br/>
+  <br/>
+  <!-- 
+  <div class="login-social-buttons"> <a href="#"> <img src="assets/img/fb.png" /> </a> <a href="#"> <img src="assets/img/twitter.png" /> </a> </div> -->
+  <!--
+  	Html DB below
+  -->
+  
+  <p id="rcp" class="message">
+        There are <span id="rowCount">_</span> rows in the table.
+    </p>
+
+    <div id="results">
+    <!-- results show here -->
+    </div>
+  
+  
+  
+</div>
+<!--
+<div data-role="footer" class="nav-glyphish-example" data-position="fixed">
+  <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+    <ul>
+      <li><a href="#" id="favorite" data-icon="custom">Login</a></li>
+      <li><a href="#" id="recent" data-icon="custom">Register</a></li>
+      <li><a href="#" id="contacts" data-icon="custom">About</a></li>
+      <li><a href="#" id="keypad" data-icon="custom">Contact</a></li>
+      <li><a href="#" id="favorite" data-icon="custom">Extras</a></li>
+    </ul>
+  </div>
+</div> -->
+</div>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+    app.initialize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+<title>Register | Build Me a Meal</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.subheading {
+	text-align: center;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+<script>
+
+ $(document).ready(function(){
+
+ if (localStorage.getItem("user") === null) {
+  location.href = 'index.html';
+}
+ 
+ 
+ var tab1 = localStorage.getItem('_tab1');
+ var tab2 = localStorage.getItem('_tab2');
+ var singre1 = localStorage.getItem('_ingre1');
+ var singre2 = localStorage.getItem('_ingre2');
+ var singre3 = localStorage.getItem('_ingre3');
+ var sbrunch= localStorage.getItem('_brunch');
+	
+   if(tab1) {
+
+  
+   $.ajax({
+		type:"POST",
+		data: "input="+tab1+"&count=1&tab=1",
+		url:"http://www.fajjemobile.info/buildmeameal.com/finalversion/htmlmeal/try.php",
+		dataType: "json",
+		success: function(msg,string,jqXHR){
+		//alert("1" + string);
+        $("#numoutput").html(msg.add+" recipes found");
+        }
+		});
+   }
+ 
+	 
+	 });
+</script>
+</head>
+
+<body>
+<!-- The title bar code -->
+<header>
+  <div id="top-bar"> <span id="title"> Recipes</span> </div>
+  <a href="index.html"><img src="img/logout.png" onclick='localStorage.clear()' width="26" id="logoutbutton" /></a>
+</header>
+
+<!-- Body code -->
+
+
+  <div class="heading3" > Favourite Recipes </div>
+
+  <div class="heading4" id="numoutput" ></div>
+<div class="spacing"></div>
+
+<iframe src="fav
+receipe_output.html?page=1" seamless width="100%" height="325" name="myiframe" style="overflow-x:hidden;"></iframe>
+  </div>
+  
+
+
+<!-- Navigation tabs code -->
+<footer   style=" position:absolute;
+   bottom:1; width:320px"> 
+
+
+<table width="100%" class="table1" >
+  <tr align="center" style="color:#76626f; font-size:10px; " align="center" height="50px" >
+    <td ><a href="search_receipe.html" style="color:#76626f; text-decoration:none;" ><img src="img/06-magnify@2x.png" width="24" height="20">
+    <br>
+     Search</a></td>
+    <td ><a href="favrecipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/111-user@2x_coloured.png"  width="28" height="22">
+    <br>
+    Profile</a></td>
+    <td><a href="recipes.html" style="color:#76626f; text-decoration:none;" ><img src="img/bld_ml_register_13.png" width="38" height="28">
+    <br>Recipe</a>
+    </td>
+    <td><a href="specific_quest.html" style="color:#76626f; text-decoration:none;" ><img src="img/20-gear2@2x.png" width="25" height="24"  >
+    <br>Prefrences</td></a>
+    <td><a href="aboutus.html" style="color:#76626f; text-decoration:none;" ><img src="img/123-id-card@2x.png" width="28" height="22" >
+    <br>About Us</a>
+    </td>
+   
+  </tr>
+
+
+</table>
+
+
+
+</footer>
+</body>
+</html>

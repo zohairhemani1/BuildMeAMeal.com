@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+<title>Register | Build Me a Meal</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.subheading {
+	text-align: center;
+}
+</style>
+
+    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+
+
+
+
+            var tab1 = localStorage.getItem('_tab1');
+            var tab2 = localStorage.getItem('_tab2');
+            var singre1 = localStorage.getItem('_ingre1');
+            var singre2 = localStorage.getItem('_ingre2');
+            var singre3 = localStorage.getItem('_ingre3');
+            var sbrunch= localStorage.getItem('_brunch');
+
+
+
+            if(tab1) {
+
+                alert("tab1");
+                $.ajax({
+                    type:"POST",
+                    data: "input="+tab1+"&count=0&tab=1",
+                    url:"try.php",
+                    dataType: "json",
+                    success: function(msg,string,jqXHR){
+                        alert("1" + string+"output");
+
+                    }
+                });
+            }
+            else if (tab2){
+                alert("tab2");
+                $.ajax({
+                    type:"POST",
+                    data: "",
+                    url:"try.php?ingre1=choc&ingre2=&ingre3=&brunch=&count=0&tab=2",
+                    dataType: "json",
+                    success: function(msg,string,jqXHR){
+                        alert("2"+string+"output");
+
+                        //console.log("Stringified" + JSON.stringify(msg));
+
+                        //Continue with javascript
+                        var i=0;
+                        while (msg.length >i){
+                            var recid = msg[i].recid;
+                            var recname = msg[i].recname;
+                            var method = msg[i].method;
+
+                            console.log(recid);
+                            console.log(recname + method);
+                          if(recname.length>20){
+                         if (method.length > 140) {
+                                method = method.substring(1, 140);
+                                method += "...";
+
+                            }}
+                            else{
+                              if (method.length > 160) {
+                                  method = method.substring(1, 160);
+                                  method += "...";
+
+                              }
+                          }
+
+//ajeeb se printing
+
+
+                            $('#output-new').append("<div class='recipediv'>"+
+                                    "<a   href='popup.html?id="+recid+"'>"+
+                                    "<table width='100%' height='70px' border='1' style='padding-left:5px; padding-top:5px;' >"+
+                                    "<tr >"+
+
+                                    "<td width='30%' height='70px' style='padding-left:13px'  background='img/about_us_03.png' style='background-size: cover;'  >"+
+
+
+                                    "</td>"+
+
+                                    "<td>"+
+                            "<table width='100%'>"+
+                                    "<tr>"+
+                                    "<td class='tabletitle'><strong>"+recname+"</strong></td>"+
+                            "</tr>"+
+                                    "<tr>"+
+                            "<td class='tablebody'>"+method+" </td>"+
+                            "</tr>"+
+                                    "<tr>"+
+                                    "<td><table width='100%' >"+
+                                    "<tr>"+
+                                    "<td style='font-size:12px; color:#771b11 ' width='40%'>Prep: 15 min</td>"+
+                                    "<td >"+
+                            "<table width='80%' height='11px' >"+
+                                    "<tr>"+
+                                    "<td style='font-size:10px'> Ratings:</td>"+
+                                    "<td><div class='rating' style='font-size:8px ; color:#F00'>"+
+                                    "<span>?</span><span>?</span><span>?</span><span>?</span><span>?</span>"+
+                            "</div></td>"+
+                            "</tr>"+
+                            "</table>"+
+
+                            "</td>"+
+                            "</tr>"+
+                            "</table>"+
+                            "</td>"+
+                            "</tr>"+
+                            "</table>"+
+                            "</td>"+
+                            "</tr>"+
+                            "</table>"+
+                            "</a>"+
+                            "</div>"+
+                            "<div class='spacing'></div>");
+
+
+
+
+                            //end
+
+                          //  $('#output-new').append(recid+"  "+method+"  "+recname+"<br>");
+
+
+                            i++;
+                        }
+
+
+                    }
+                });
+            }
+            else{
+                alert("tab3");
+                $.ajax({
+                    type:"POST",
+                    data:"count=0&tab=3",
+                    url:"try.php",
+                    dataType: "json",
+                    success: function(msg,string,jqXHR){
+                        alert("3"+string+"output");
+
+                    }
+                });
+
+            }
+
+
+        });
+    </script>
+
+
+</head>
+<body class="framebody1">
+<div align="center" id="output-new">
+
+<!-- frame open -->
+
+<div class="recipediv">
+<table width="100%" border="1" style="padding-left:5px; padding-top:5px;" >
+  <tr >
+          
+        <td width="30%" height="70px" style="padding-left:13px"  background="img/about_us_03.png" style="background-size: cover;"  >
+          
+      
+       </td>
+      
+    <td>
+    <table width="100%">
+  <tr>
+    <td class="tabletitle"><strong>Crispy marryland soft-shell crab</strong></td>
+  </tr>
+  <tr>
+    <td class="tablebody">Lorem Ipsum is simply dummy text of the printing and typesetting 
+	industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an </td>
+  </tr>
+  <tr>
+    <td><table width="100%" >
+  <tr>
+    <td style="font-size:12px; color:#771b11 " width="40%">Prep: 15 min</td>
+    <td >
+    <table width="80%" height="11px" >
+  <tr>
+    <td style="font-size:10px"> Ratings:</td>
+    <td><div class="rating" style="font-size:8px ; color:#F00">
+<span>?</span><span>?</span><span>?</span><span>?</span><span>?</span>
+</div></td>
+  </tr>
+</table>
+
+</td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table>
+
+</div>
+<div class="spacing"></div>
+
+<!-- frame close-->
+
+
+    </div>
+</body>
+</html>
+<!-- frame open -->
+
+
+
+
+
+
+<!-- frame close-->
+

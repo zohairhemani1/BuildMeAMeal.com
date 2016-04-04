@@ -1,0 +1,27 @@
+
+.small{
+	width:5%;
+}
+#button2{
+	margin-left:5px
+	}
+#button1{
+	margin-left:0px;
+}
+#box{
+	border:64px solid #eee;
+	border-radius:6px;
+}
+#box1{
+	border:1px #CCC;
+	box-shadow:1px #CCC;
+}
+#button{
+	margin-left:171px;
+}
+.method{
+	
+}
+#image{
+	margin-left:40px;
+}
